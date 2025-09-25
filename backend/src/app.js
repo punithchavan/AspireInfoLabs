@@ -69,7 +69,12 @@ app.use(cookieParser());
 
 // Prevent MongoDB operator injection in queries
 // Example: { "email": { "$gt": "" } } → blocked
-app.use(mongoSanitize());
+app.use((req, res, next) => {
+  if (req.body) mongoSanitize.sanitize(req.body);
+  if (req.params) mongoSanitize.sanitize(req.params);
+  // skip req.query to avoid "Cannot set property query" error
+  next();
+});
 
 // Rate limiting on auth routes → stops brute force attacks
 app.use(
@@ -83,11 +88,11 @@ app.use(
   })
 );
 
-/* ---------------- Routes ---------------- */
+import userRoutes from "./routes/user.routes.js";
+import deviceRoutes from "./routes/device.routers.js";
 
-// Example import (you’ll create this later)
-// import authRoutes from "./routes/authRoutes.js";
-// app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/devices", deviceRoutes);
 
 
 

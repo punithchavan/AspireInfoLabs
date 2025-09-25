@@ -2,11 +2,11 @@ import mongoose, { Schema } from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+
 const userSchema = new Schema({
   username: {
     type: String,
-    unique: true,
-    sparse: true,
+    //sparse: true,
     lowercase: true,
     trim: true,
     default: null,
@@ -14,7 +14,7 @@ const userSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
+    //unique: true,
     trim: true,
   },
   fullName: { type: String, required: true, trim: true, index: true },
@@ -31,7 +31,7 @@ const userSchema = new Schema({
 //   ],
   refreshToken: String,
   emailVerificationToken: String,
-  emailVerificationTokenExpiry: { type: Date, index: true },
+  emailVerificationTokenExpiry: { type: Date},
 
   /* --- Additional Security Fields --- */
   twoFactorEnabled: { type: Boolean, default: false },
@@ -89,7 +89,7 @@ userSchema.methods.generateEmailVerificationToken = function() {
 
 
 userSchema.index({ email: 1 });
-userSchema.index({ username: 1 });
+userSchema.index({ username: 1 }, { unique: true, sparse: true });
 userSchema.index({ "emailVerificationTokenExpiry": 1 }, { expireAfterSeconds: 0 });
 
 export const User = mongoose.model("User", userSchema);
