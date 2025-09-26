@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../api/userApi";
 import { FiSettings } from "react-icons/fi";
+import { Preferences } from "./preferences";
 
 const Header = () => {
     const [user, setUser] = useState(null);
     const [settingsOpen, setSettingsOpen] = useState(false);
     const [showFullPic, setShowFullPic] = useState(false);
     const navigate = useNavigate();
+    const [showPreferences, setShowPreferences] = useState(false);
 
     useEffect( () => {
         const fetchUser = async () => {
@@ -71,7 +73,14 @@ const Header = () => {
                 <div className="absolute top-14 right-4 bg-white border rounded shadow-md p-2 z-50">
                 <ul className="text-sm space-y-2">
                     <li className="cursor-pointer">Account</li>
-                    <li className="cursor-pointer">Preferences</li>
+                    <li className="cursor-pointer" onClick={()=> setShowPreferences(!showPreferences)}>
+                        Preferences
+                    </li>
+                    {showPreferences && (
+                        <div className="absolute top-full right-0 bg-white border rounded shadow-md p-4 z-50">
+                            <Preferences />
+                        </div>
+                    )}
                     <li
                     className="cursor-pointer text-red-500"
                     onClick={() => {

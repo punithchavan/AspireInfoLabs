@@ -34,7 +34,7 @@ const LoginPage = () => {
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-50">
         <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-xl p-8 w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center mb-4">newsX</h1>  
+        <h1 className="text-3xl font-bold text-center mb-4">AspireInfoLabs</h1>  
         <h2 className="text-2xl font-semibold mb-6 text-center">Login</h2>
 
         <input

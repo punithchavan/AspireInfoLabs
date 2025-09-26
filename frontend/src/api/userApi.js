@@ -38,11 +38,28 @@ const getUser = async () => {
   return response.data;
 };
 
+const enable2FA = async () =>{
+    const response = await API.post("/users/2fa/enable", {}, { withCredentials: true});
+    return response
+}
+
+const verify2FA = async (token) => {
+    const response = await API.post("/users/2fa/verify", { token }, { withCredentials: true });
+    return response.data;
+}
+
+const loginWith2FA = async ({ userId, token }) =>{
+    const response = await API.post("users/login-2fa", { userId, token }, { withCredentials: true });
+    return response.data;
+}
 
 export {
     registerUser,
     verifyEmail,
     completeProfile,
     loginUser,
-    getUser
+    getUser,
+    enable2FA,
+    verify2FA,
+    loginWith2FA
 }
