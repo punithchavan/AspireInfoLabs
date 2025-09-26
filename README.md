@@ -1,6 +1,6 @@
 # Secure Login & Registration Flow
 
-![Project Logo](./logo.png) <!-- optional -->
+
 
 ## Overview
 
