@@ -116,7 +116,7 @@ project-root/
 
 Contributions
 
-Punith Chavan – GitHub
+Punith Chavan – @punithchavan
 
 Frontend & backend development, security logic, cyber-attack simulation.
 
