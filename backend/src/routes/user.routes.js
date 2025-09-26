@@ -11,6 +11,7 @@ import {
   enable2FA,
   verify2FA,
   loginWith2FA,
+  getCurrentUser
 } from "../controllers/user.controller.js";
 
 const router = Router();
@@ -28,6 +29,7 @@ router.post("/complete-profile", verifyJWT, upload.fields([{ name: "profilePictu
 router.post("/logout", logoutUser);
 router.post("/2fa/enable", enable2FA);
 router.post("/2fa/verify", verify2FA);
+router.get("/me", getCurrentUser);
 
 
 export default router;

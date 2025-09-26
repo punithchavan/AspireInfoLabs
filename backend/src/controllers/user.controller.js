@@ -351,6 +351,12 @@ const loginWith2FA = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, { user, accessToken, refreshToken }, "2FA login successful"));
 });
 
+// Get Current User
+const getCurrentUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password -refreshToken");
+  return res.status(200).json(new ApiResponse(200, user, "Current user fetched successfully"));
+});
+
 export {
     registerUser,
     verifyEmail,
@@ -360,5 +366,6 @@ export {
     refreshAccessToken,
     enable2FA,
     verify2FA,
-    loginWith2FA
+    loginWith2FA,
+    getCurrentUser
 };
